@@ -8,6 +8,14 @@ const port = 3000
 
 app.get('/insurances', (req, res) => {
   Insurance.findAll({
+    where: {
+      airlinesName: {
+        $like: `%${req.query.airlinesName}%`
+      },
+      flightNumber: {
+        $like: `%${req.query.flightNumber}%`
+      }
+    },
     attributes: ['airlinesName', 'flightNumber', 'dateFlight', 'passenger', 'price'],
   })
   .then(
