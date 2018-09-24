@@ -9,36 +9,40 @@ function createOrder (req, res) {
   })
     .then(
       () => {
-        Insurance.findById(req.body.insuranceId)
-          .then(
-            insurance => {
-              if (insurance) {
-                insurance.passenger = insurance.passenger - 1
-                insurance.save()
-                  .then(
-                    () => {
-                      return res.send({
-                        error: false,
-                        message: 'Transaction has been created successully'
-                      })
-                    }
-                  )
-              }
-            }
-          )
-          .catch(
-            err => {
-              return res.send({
-                error: true,
-                message: err
-              })
-            }
-          )
+        updateInsurancePassenger(req, res)
       }
     )
     .catch(
       err => {
         res.send({
+          error: true,
+          message: err
+        })
+      }
+    )
+}
+
+function updateInsurancePassenger (req, res) {
+  Insurance.findById(req.body.insuranceId)
+    .then(
+      insurance => {
+        if (insurance) {
+          insurance.passenger = insurance.passenger - 1
+          insurance.save()
+            .then(
+              () => {
+                return res.send({
+                  error: false,
+                  message: 'Transaction has been created successully'
+                })
+              }
+            )
+        }
+      }
+    )
+    .catch(
+      err => {
+        return res.send({
           error: true,
           message: err
         })
