@@ -1,5 +1,6 @@
-const Insurance = require('../../models/Insurance')
-const InsuranceDetail = require('../../models/InsuranceDetail')
+const db = require('../../config/db')
+const Insurance = db.insurance
+const InsuranceDetail = db.insurance_detail
 
 function getAll (req, res) {
   Insurance.findAll({
@@ -64,8 +65,6 @@ function getById (req, res) {
       }
     )
 }
-
-// TODO create order function
 
 module.exports = {
   getAll,

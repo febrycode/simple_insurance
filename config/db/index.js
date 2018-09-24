@@ -12,9 +12,9 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.insurance = require('./models/Insurance')(sequelize, Sequelize)
-db.insurance_detail = require('./models/InsuranceDetail')(sequelize, Sequelize)
-db.order = require('./models/Order')(sequelize, Sequelize)
+db.insurance = require('../../models/Insurance')(sequelize, Sequelize)
+db.insurance_detail = require('../../models/InsuranceDetail')(sequelize, Sequelize)
+db.order = require('../../models/Order')(sequelize, Sequelize)
 
 db.insurance.hasMany(
   db.insurance_detail,
