@@ -7,13 +7,15 @@ function getAll (req, res) {
     where: {
       airlinesName: {
         $like: `%${req.query.airlinesName}%`
+      },
+      flightNumber: {
+        $like: `%${req.query.flightNumber}%`
+      },
+      dateFlight: {
+        $like: `%${req.query.dateFlight}%`
       }
-      // TODO search data by properties
-      // flightNumber: {
-      //   $like: `%${req.query.flightNumber}%`
-      // }
     },
-    attributes: ['airlinesName', 'flightNumber', 'dateFlight', 'passenger', 'price'],
+    attributes: ['airlinesName', 'flightNumber', 'dateFlight', 'passenger', 'price']
   })
     .then(
       insurances => {
