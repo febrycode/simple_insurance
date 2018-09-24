@@ -1,4 +1,5 @@
 const insuranceService = require('../controllers/insurances')
+const orderService = require('../controllers/orders')
 
 function init (server) {
   server.get('*', function (req, res, next) {
@@ -8,6 +9,7 @@ function init (server) {
 
   server.get('/insurances', insuranceService.getAll)
   server.get('/insurances/:id', insuranceService.getById)
+  server.post('/orders', orderService.createOrder)
 }
 
 module.exports = {
