@@ -27,7 +27,7 @@ function updateInsurancePassenger (req, res) {
     .then(
       insurance => {
         if (insurance) {
-          insurance.passenger = insurance.passenger - 1
+          insurance.passenger = insurance.passenger + 1
           insurance.save()
             .then(
               () => {

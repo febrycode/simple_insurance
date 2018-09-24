@@ -6,16 +6,17 @@ const should = chai.should()
 const server = require('../index')
 const db = require('../config/db')
 const Insurance = db.insurance
+const InsuranceDetail = db.insurance_detail
 const truncate = require('./truncate')
 
 chai.use(chaiHttp)
 
 describe('Insurance', () => {
   beforeEach(async () => {
-    await truncate(Insurance)
+    await truncate([InsuranceDetail, Insurance])
   })
 
-  describe('GET /jobs', () => {
+  describe('GET /insurances', () => {
     it('it should error if do not complete params', (done) => {
       chai.request(server)
         .get('/insurances')

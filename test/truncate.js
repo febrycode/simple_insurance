@@ -1,7 +1,9 @@
 const truncateTable = (modelName) => {
-  modelName.destroy({
-    where: {},
-    force: true
+  modelName.forEach((elem) => {
+    elem.destroy({
+      where: {},
+      force: true
+    })
   })
 }
 

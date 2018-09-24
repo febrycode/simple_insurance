@@ -47,22 +47,22 @@ function getById (req, res) {
   const insuranceId = req.params.id
 
   InsuranceDetail.findAll({
-    attributes: ['description', 'termCondition'],
+    attributes: ['id', 'description', 'termCondition'],
     where: {
       insuranceId: insuranceId
     },
     include: [
       {
         model: Insurance,
-        attributes: ['airlinesName', 'flightNumber', 'dateFlight', 'passenger', 'price'],
+        attributes: ['id', 'airlinesName', 'flightNumber', 'dateFlight', 'passenger', 'price'],
       }
     ]
   })
     .then(
-      insuranceDetails => {
+      insuranceDetail => {
         res.status(200).send({
           error: false,
-          insuranceDetails: insuranceDetails
+          insuranceDetail: insuranceDetail
         })
       }
     )
