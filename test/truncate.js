@@ -1,10 +1,5 @@
 const truncateTable = (modelName) => {
-  modelName.forEach((elem) => {
-    elem.destroy({
-      where: {},
-      force: true
-    })
-  })
+  modelName.destroy({where: {}}).then(function () {});
 }
 
 module.exports = async function truncate(model) {

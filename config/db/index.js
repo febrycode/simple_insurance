@@ -23,7 +23,8 @@ db.insurance.hasMany(
   db.insurance_detail,
   {
     foreignKey: 'insurance_id',
-    sourceKey: 'id'
+    sourceKey: 'id',
+    onDelete: 'cascade'
   }
 )
 

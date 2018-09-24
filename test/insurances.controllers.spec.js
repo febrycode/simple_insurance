@@ -12,10 +12,6 @@ const truncate = require('./truncate')
 chai.use(chaiHttp)
 
 describe('Insurance', () => {
-  beforeEach(async () => {
-    await truncate([InsuranceDetail, Insurance])
-  })
-
   describe('GET /insurances', () => {
     it('it should error if do not complete params', (done) => {
       chai.request(server)
@@ -47,7 +43,48 @@ describe('Insurance', () => {
           res.body.error.should.equal(false)
           res.body.should.to.have.property('insurance')
           done()
+        })
+    })
+  })
+
+  describe('GET /insurances/:id', () => {
+    before(async () => {
+      await truncate(Insurance)
+    })
+
+    it('it returns data insurance detail', (done) => {
+      const insurance = new Insurance({
+        airlinesName: 'Airline Name',
+        flightNumber: 'Flight Number',
+        dateFlight: '2018-12-12 09:00:00',
+        passenger: 0,
+        price: 300000
       })
+
+      insurance.save().then(
+        (insurance) => {
+          const insuranceDetail = new InsuranceDetail({
+            insuranceId: insurance.id,
+            description: 'Description',
+            termCondition: 'Term Condition'
+          })
+
+          insuranceDetail.save().then(
+            (insuranceDetail) => {
+              chai.request(server)
+                .get('/insurances/' + insuranceDetail.insuranceId)
+                .end((err, res) => {
+                  should.not.exist(err)
+                  res.body.should.be.a('object')
+                  res.status.should.equal(200)
+                  res.body.error.should.equal(false)
+                  res.body.should.to.have.property('insuranceDetail')
+                  done()
+                })
+            }
+          )
+        }
+      )
     })
   })
 })
