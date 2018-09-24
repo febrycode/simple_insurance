@@ -1,17 +1,13 @@
-const express = require('express')
-const app = express()
-const db = require('./sequelize')
-const Insurance = db.insurance
-const InsuranceDetail = db.insurance_detail
+const Insurance = require('../../models/Insurance')
+const InsuranceDetail = require('../../models/InsuranceDetail')
 
-const port = 3000
-
-app.get('/insurances', (req, res) => {
+function getAll (req, res) {
   Insurance.findAll({
     where: {
-      // airlinesName: {
-      //   $like: `%${req.query.airlinesName}%`
-      // },
+      airlinesName: {
+        $like: `%${req.query.airlinesName}%`
+      }
+      // TODO search data by properties
       // flightNumber: {
       //   $like: `%${req.query.flightNumber}%`
       // }
@@ -23,7 +19,7 @@ app.get('/insurances', (req, res) => {
         res.status(200).send({
           error: false,
           insurances: insurances
-        });
+        })
       }
     )
     .catch(
@@ -34,9 +30,9 @@ app.get('/insurances', (req, res) => {
         })
       }
     )
-})
+}
 
-app.get('/insurances/:id', (req, res) => {
+function getById (req, res) {
   const insuranceId = req.params.id
 
   InsuranceDetail.findAll({
@@ -67,8 +63,11 @@ app.get('/insurances/:id', (req, res) => {
         })
       }
     )
-})
+}
 
 // TODO create order function
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+module.exports = {
+  getAll,
+  getById
+}
