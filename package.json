@@ -9,7 +9,9 @@
     "mysql2": "^1.6.1",
     "sequelize": "^4.38.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
