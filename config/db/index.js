@@ -6,7 +6,8 @@ const configDb = (process.env.NODE_ENV === 'test') ? config.test : config.dev
 const sequelize = new Sequelize(configDb.dbDatabase, configDb.dbUser, configDb.dbPassword, {
   host: configDb.dbHost,
   dialect: configDb.dbDialect,
-  pool: configDb.dbPool
+  pool: configDb.dbPool,
+  logging: false
 })
 
 const db = {}
