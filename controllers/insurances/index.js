@@ -3,7 +3,15 @@ const Insurance = db.insurance
 const InsuranceDetail = db.insurance_detail
 
 function getAll (req, res) {
-  Insurance.findAll({
+  if (typeof req.query.airlinesName === 'undefined' ||
+  typeof req.query.flightNumber === 'undefined' ||
+  typeof req.query.dateFlight === 'undefined') {
+    return res.send({
+      error: true,
+      messages: 'Please completed params query (airline name, flight number, date of flight)'
+    })
+  }
+  Insurance.findOne({
     where: {
       airlinesName: {
         $like: `%${req.query.airlinesName}%`
@@ -18,10 +26,10 @@ function getAll (req, res) {
     attributes: ['airlinesName', 'flightNumber', 'dateFlight', 'passenger', 'price']
   })
     .then(
-      insurances => {
+      insurance => {
         res.status(200).send({
           error: false,
-          insurances: insurances
+          insurance: insurance
         })
       }
     )

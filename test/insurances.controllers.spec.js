@@ -44,7 +44,7 @@ describe('Insurance', () => {
           res.body.should.be.a('object')
           res.status.should.equal(200)
           res.body.error.should.equal(false)
-          res.body.should.to.have.property('insurances')
+          res.body.should.to.have.property('insurance')
           done()
       })
     })
