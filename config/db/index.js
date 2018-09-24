@@ -1,10 +1,12 @@
 const Sequelize = require('sequelize')
 const config = require('../global')
 
-const sequelize = new Sequelize(config.dbDatabase, config.dbUser, config.dbPassword, {
-  host: config.dbHost,
-  dialect: config.dbDialect,
-  pool: config.dbPool
+const configDb = (process.env.NODE_ENV === 'test') ? config.test : config.dev
+
+const sequelize = new Sequelize(configDb.dbDatabase, configDb.dbUser, configDb.dbPassword, {
+  host: configDb.dbHost,
+  dialect: configDb.dbDialect,
+  pool: configDb.dbPool
 })
 
 const db = {}
