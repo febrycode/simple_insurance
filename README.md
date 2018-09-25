@@ -1,5 +1,5 @@
 # Insurance
-Simple Insurance App to based on some criterias use Express JS
+Simple Insurance App use Express JS
 
 ## Usage
 1. Clone the repository or download and extract it
@@ -17,3 +17,7 @@ insurance $ nodemon index.js
 2. Get insurance price should use airline name, flight number, and date of flight to get specific price.
 3. Use insurance id to get descriptions, term and conditions. It could use to confirmation payment API.
 4. Create order (From client) use insurance id, username to send to server.
+
+## API Documentation
+
+For API documentation, you could open (https://documenter.getpostman.com/view/532427/RWaPumWL).
